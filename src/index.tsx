@@ -11,7 +11,7 @@ import 'react-toastify/ReactToastify.min.css';
 import './styles/index.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom/client";
 import { ToastContainer } from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 
@@ -23,8 +23,14 @@ import { refreshTokenAndSubscribe } from './common/api/refreshByInterval';
 
 async function initApp() {
   await refreshTokenAndSubscribe();
+  
+  const rootElement = document.getElementById('root');
 
-  ReactDOM.render(
+  
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+
+  root.render(
     <React.StrictMode>
       <authService.AuthProvider>
         <ThemeProvider>
@@ -32,10 +38,12 @@ async function initApp() {
           <ToastContainer position="bottom-right" newestOnTop />
         </ThemeProvider>
       </authService.AuthProvider>
-    </React.StrictMode>,
-    document.getElementById('root'),
+    </React.StrictMode>
   );
+} else {
+  console.error('Root element with ID "root" not found in the document.');
 }
+};
 
 initApp();
 // If you want to start measuring performance in your app, pass a function

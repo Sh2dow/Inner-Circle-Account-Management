@@ -36,7 +36,7 @@ function SidebarItem({
   sidebarContainerRef?: MutableRefObject<HTMLElement | null>;
   className?: string;
   icon?: ReactNode;
-  iconActive?: (() => JSX.Element) | ReactNode;
+  iconActive?: ReactNode;
   iconMini?: ReactNode;
   label: string;
   path?: string;
